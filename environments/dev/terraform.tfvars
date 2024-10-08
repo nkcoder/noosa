@@ -11,6 +11,10 @@ app_port = 3000
 # rds
 rds_db_name = "app_db"
 rds_db_user = "app_user"
+rds_scaling_min_capacity = 0.5
+rds_scaling_max_capacity = 1
+rds_deletion_protection = false
+rds_backup_retention_period = 7
 
 # alb
 alb_app_port                         = 80

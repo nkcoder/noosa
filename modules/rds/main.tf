@@ -11,16 +11,16 @@ resource "aws_rds_cluster" "rds_cluster" {
   vpc_security_group_ids      = [var.rds_cluster_sg_id]
 
   serverlessv2_scaling_configuration {
-    min_capacity = 0.5
-    max_capacity = 1
+    min_capacity = var.scaling_min_capacity
+    max_capacity = var.scaling_max_capacity
   }
 
   apply_immediately       = true
-  backup_retention_period = 7
-  deletion_protection     = false
+  backup_retention_period = var.backup_retention_period
+  deletion_protection     = var.deletion_protection
 
   skip_final_snapshot          = false
-  final_snapshot_identifier    = "${var.app_name}-rds-cluster-snapshot-${var.environment}"
+  final_snapshot_identifier    = "${var.app_name}-rds-cluster-snapshot-${var.environment}-${formatdate("YYYY-MM-DD", timestamp())}"
   preferred_maintenance_window = "Sat:14:00-Sat:15:00"
   preferred_backup_window      = "16:00-18:00"
 }

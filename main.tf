@@ -26,14 +26,18 @@ module "ecr" {
 module "rds" {
   source = "./modules/rds"
 
-  environment       = var.environment
-  vpc_id            = module.vpc.vpc_id
-  subnet_ids        = module.vpc.private_subnet_ids
-  ecs_service_sg_id = module.vpc.ecs_servcie_sg_id
-  rds_cluster_sg_id = module.vpc.rds_sg_id
-  db_name           = var.rds_db_name
-  db_user           = var.rds_db_user
-  app_name          = var.app_name
+  environment             = var.environment
+  vpc_id                  = module.vpc.vpc_id
+  subnet_ids              = module.vpc.private_subnet_ids
+  ecs_service_sg_id       = module.vpc.ecs_servcie_sg_id
+  rds_cluster_sg_id       = module.vpc.rds_sg_id
+  db_name                 = var.rds_db_name
+  db_user                 = var.rds_db_user
+  app_name                = var.app_name
+  scaling_min_capacity    = var.rds_scaling_min_capacity
+  scaling_max_capacity    = var.rds_scaling_max_capacity
+  deletion_protection     = var.rds_deletion_protection
+  backup_retention_period = var.rds_backup_retention_period
 }
 
 module "alb" {
@@ -72,7 +76,7 @@ module "ecs" {
   alb_sg_id            = module.vpc.alb_sg_id
   ecs_service_sg_id    = module.vpc.ecs_servcie_sg_id
   rds_cluster_arn      = module.rds.rds_cluster_arn
-  container_name       = var.app_name + "-container-" + var.environment
+  container_name       = "${var.app_name}-container-${var.environment}"
   container_port       = module.vpc.ecs_app_port
   alb_target_group_arn = module.alb.alb_target_group_arn
   app_name             = var.app_name

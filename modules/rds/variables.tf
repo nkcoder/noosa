@@ -43,3 +43,23 @@ variable "app_name" {
   description = "The name of the application"
   type        = string
 }
+
+variable "scaling_min_capacity" {
+  description = "The minimum capacity for the Aurora Serverless v2 cluster"
+  type        = number
+}
+
+variable "scaling_max_capacity" {
+  description = "The maximum capacity for the Aurora Serverless v2 cluster"
+  type        = number
+}
+
+variable "backup_retention_period" {
+  description = "The backup retention period for the RDS cluster"
+  type        = number
+}
+
+variable "deletion_protection" {
+  description = "Enable deletion protection for the RDS cluster"
+  type        = bool
+}

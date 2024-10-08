@@ -37,6 +37,23 @@ variable "rds_db_password" {
   description = "The password for the RDS database"
   type        = string
 }
+variable "rds_scaling_min_capacity" {
+  description = "The minimum capacity for the Aurora Serverless v2 cluster"
+  type        = number
+}
+variable "rds_scaling_max_capacity" {
+  description = "The maximum capacity for the Aurora Serverless v2 cluster"
+  type        = number
+}
+variable "rds_deletion_protection" {
+  description = "Enable deletion protection for the RDS cluster"
+  type        = bool
+}
+variable "rds_backup_retention_period" {
+  description = "The backup retention period for the RDS cluster"
+  type        = number
+}
+
 
 # variables for the alb module
 variable "alb_app_port" {

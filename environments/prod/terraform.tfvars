@@ -9,8 +9,12 @@ ecr_name = "backend-app-ecr-repo"
 app_port = 3000
 
 # rds
-rds_db_name = "app_db"
-rds_db_user = "app_user"
+rds_db_name                 = "app_db"
+rds_db_user                 = "app_user"
+rds_scaling_min_capacity    = 1
+rds_scaling_max_capacity    = 2
+rds_deletion_protection     = true
+rds_backup_retention_period = 30
 
 # alb
 alb_app_port                         = 80
