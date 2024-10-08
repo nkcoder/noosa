@@ -40,14 +40,14 @@ tf apply -var-file="environments/prod/terraform.tfvars"
 
 ### RDS
 
-- [] alarms
+- [ ] alarms
 
 ### ALB
 
-- [] configure SSL/TLS certificate, 443
-- [] alarms
+- [ ] configure SSL/TLS certificate, 443
+- [ ] alarms
 
 ### ECS
 
-- [] alarms
-- [] move to private subnets and link to NAT to access ECR images
+- [ ] alarms
+- [ ] move to private subnets and link to NAT to access ECR images
