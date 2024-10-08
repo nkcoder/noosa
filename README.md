@@ -14,11 +14,13 @@ tf apply -var-file="environments/dev/terraform.tfvars"
 
 ### RDS
 
-- alarm
+- [] alarms
 
 ### ALB
 
-- configure SSL/TLS certificate
-- alarm
+- [] configure SSL/TLS certificate, 443
+- [] alarms
 
 ### ECS
+
+- [] alarms

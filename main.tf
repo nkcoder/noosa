@@ -39,12 +39,17 @@ module "rds" {
 module "alb" {
   source = "./modules/alb"
 
-  environment = var.environment
-  vpc_id      = module.vpc.vpc_id
-  subnet_ids  = module.vpc.public_subnet_ids
-  alb_sg_id   = module.vpc.alb_sg_id
-  app_port    = var.alb_app_port
-  app_name    = var.app_name
+  environment                      = var.environment
+  vpc_id                           = module.vpc.vpc_id
+  subnet_ids                       = module.vpc.public_subnet_ids
+  alb_sg_id                        = module.vpc.alb_sg_id
+  app_port                         = var.alb_app_port
+  app_name                         = var.app_name
+  health_check_interval            = var.alb_health_check_interval
+  health_check_timeout             = var.alb_health_check_timeout
+  health_check_healthy_threshold   = var.alb_health_check_healthy_threshold
+  health_check_unhealthy_threshold = var.alb_health_check_unhealthy_threshold
+  tg_min_healthy_targets           = var.alb_tg_min_healthy_targets
 }
 
 module "ecs" {
@@ -67,7 +72,7 @@ module "ecs" {
   alb_sg_id            = module.vpc.alb_sg_id
   ecs_service_sg_id    = module.vpc.ecs_servcie_sg_id
   rds_cluster_arn      = module.rds.rds_cluster_arn
-  container_name       = var.ecs_container_name
+  container_name       = var.app_name + "-container-" + var.environment
   container_port       = module.vpc.ecs_app_port
   alb_target_group_arn = module.alb.alb_target_group_arn
   app_name             = var.app_name

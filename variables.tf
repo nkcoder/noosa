@@ -43,6 +43,31 @@ variable "alb_app_port" {
   description = "The port on which the application listens"
   type        = number
 }
+variable "alb_health_check_interval" {
+  description = "Interval for the health check"
+  type        = number
+  default     = 30
+}
+variable "alb_health_check_timeout" {
+  description = "Timeout for the health check"
+  type        = number
+  default     = 10
+}
+variable "alb_health_check_healthy_threshold" {
+  description = "Healthy threshold for the health check"
+  type        = number
+  default     = 3
+}
+variable "alb_health_check_unhealthy_threshold" {
+  description = "Unhealthy threshold for the health check"
+  type        = number
+  default     = 2
+}
+variable "alb_tg_min_healthy_targets" {
+  description = "Minimum healthy targets for the target group"
+  type        = number
+  default     = 1
+}
 
 # variables for the ecs module
 variable "ecs_image_tag" {
@@ -69,18 +94,3 @@ variable "ecs_desired_count" {
   description = "The desired count for the ECS service"
   type        = number
 }
-variable "ecs_container_name" {
-  description = "The name of the container"
-  type        = string
-}
-
-
-
-
-
-
-
-
-
-
-

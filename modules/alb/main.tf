@@ -15,11 +15,17 @@ resource "aws_lb_target_group" "app_alb_target_group" {
 
   health_check {
     path                = "/health"
-    interval            = 30
-    timeout             = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
+    interval            = var.health_check_interval
+    timeout             = var.health_check_timeout
+    healthy_threshold   = var.health_check_healthy_threshold
+    unhealthy_threshold = var.health_check_unhealthy_threshold
     matcher             = "200-299"
+  }
+
+  target_group_health {
+    dns_failover {
+      minimum_healthy_targets_count = var.tg_min_healthy_targets
+    }
   }
 
   target_type = "ip"
